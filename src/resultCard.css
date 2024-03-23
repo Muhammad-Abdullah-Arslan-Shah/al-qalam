@@ -1,0 +1,25 @@
+.container-fixed {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.school-logo-container {
+  width: 100px;
+}
+
+.school-logo {
+  width: 100%;
+  height: auto;
+}
+
+.school-name {
+  font-size: 60px;
+}
+
+.school-description {
+  font-size: 14px;
+}
+
+.double-border-container {
+  border: 4px double #000;
+}
