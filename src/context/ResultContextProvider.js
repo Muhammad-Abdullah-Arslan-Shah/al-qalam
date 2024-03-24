@@ -2,6 +2,8 @@ import React,{useState} from "react";
 import ResultContext from "./ResultContext";
 
 const ResultContextProvider = ({children}) => {
+   
+    
     const [uprdata, setUprdata] = useState({
         name: "",
         class: "",

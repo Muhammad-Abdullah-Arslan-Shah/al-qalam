@@ -3,10 +3,23 @@ import { Form, Button } from "react-bootstrap"; // Importing form components fro
 import "bootstrap/dist/css/bootstrap.min.css"; // Importing Bootstrap CSS
 import resultContext from "../context/ResultContext"; // Importing the context for result data
 import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation
-
+import Alert from './Alert';
 const ResultForm = () => {
   const navigator = useNavigate(); // Initializing useNavigate
+  const [alert,setAlert] = useState(null);
 
+  const showAlert = (message,type)=>
+  {
+   
+ setAlert(
+   {  msg:message,
+      type:type
+   }
+ )
+ setTimeout(()=>{
+ setAlert(null);}
+ ,1000);
+ }
   // States for student data
   const [studentName, setStudentName] = useState(""); // State for student's name
   const [teacherName, setTeacherName] = useState(""); // State for teacher's name
@@ -29,6 +42,7 @@ const ResultForm = () => {
     let markArray = marksArray; // Creating a copy of marks array
     markArray.push(markObj); // Adding new subject marks to the array
     setMarksArray(markArray); // Updating the marks array in context
+    showAlert("Subject Addded Successfully","Success")
   };
 
   // Function to handle generation of result card
@@ -46,6 +60,7 @@ const ResultForm = () => {
 
   return (
     <>
+    
       <div className="container">
         {/* Title */}
         <h3 className="text-center my-3">
@@ -166,6 +181,7 @@ const ResultForm = () => {
                 Add Subject
               </Button>
             </div>
+            <Alert alert = {alert}/>
               </fieldset>
             </section>
            

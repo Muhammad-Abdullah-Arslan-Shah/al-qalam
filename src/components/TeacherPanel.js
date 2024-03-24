@@ -8,6 +8,7 @@ navigate("/resultform");
     }
   return (
     <>
+    
      <div className='container my-5'>
         <h1  className='my-5'>Welcome Teachers</h1>
         <button className='btn btn-success' onClick={navToResultForm}> Generate Result Card</button>

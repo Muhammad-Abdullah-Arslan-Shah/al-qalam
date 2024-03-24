@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
 import CampusCard from './CampusCard';
-import Fade from 'react-reveal/Fade';
+import Header from "./Header";
+import Footer from "./Footer";
 function OurCampuses() {
   return (
     <>
-      <div className="container">
+    <Header></Header>
+    <div className="container">
       <div className="row">
-<Fade bottom>
         <div className="col-md-4 mt-4">
           <CampusCard
             campusName="Al-Qalam High School (Abdullah Campus)"
@@ -17,8 +18,6 @@ function OurCampuses() {
             imageUrl="https://example.com/campus-image.jpg" // Replace with your actual image URL
           />
         </div>
-        </Fade>
-        <Fade bottom>
         <div className="col-md-4 mt-4">
           <CampusCard
             campusName="Al-Qalam High School (Abdul-Rehman Campus)"
@@ -29,8 +28,6 @@ function OurCampuses() {
             imageUrl="https://example.com/campus-image.jpg" // Replace with your actual image URL
           />
         </div>
-        </Fade>
-        <Fade bottom>
         <div className="col-md-4 mt-4">
           <CampusCard
             campusName="Al-Qalam High School (Abdullah Campus)"
@@ -41,8 +38,6 @@ function OurCampuses() {
             imageUrl="https://example.com/campus-image.jpg" // Replace with your actual image URL
           />
         </div>
-        </Fade>
-        <Fade bottom>
         <div className="col-md-4 mt-4">
           <CampusCard
             campusName="Al-Qalam High School (Abdullah Campus)"
@@ -53,12 +48,11 @@ function OurCampuses() {
             imageUrl="https://example.com/campus-image.jpg" // Replace with your actual image URL
           />
         </div>
-        </Fade>
-       
       </div>
-    </div> 
+    </div>
+    <Footer/>
     </>
-  )
+  );
 }
 
-export default OurCampuses
+export default OurCampuses;
