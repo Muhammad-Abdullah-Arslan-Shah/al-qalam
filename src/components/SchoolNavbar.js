@@ -21,8 +21,8 @@ const SchoolNavbar = () => {
               
             
             </NavDropdown>
-            <NavDropdown  title="Addmitions" id="basic-nav-dropdown" >
-              <Link to="/addmitionForm" className="dropdown-item fs-5">Online Addmition</Link>
+            <NavDropdown  title="Admissions" id="basic-nav-dropdown" >
+              <Link to="/admissionForm" className="dropdown-item fs-5">Online Admission</Link>
               
             
             </NavDropdown>

@@ -1,8 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../pictures/logo2.png';
-import Header from "./Header";
-import Footer from "./Footer";
 const CampusCard = ({ campusName, address, country, city, principal, imageUrl }) => {
   return (
     <div className="mt-4">

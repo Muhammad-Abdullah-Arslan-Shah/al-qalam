@@ -12,8 +12,9 @@ import ResultForm from "./components/ResultForm";
 import TeacherPanel from "./components/TeacherPanel";
 import ResultContextProvider from './context/ResultContextProvider'
 import PrintResultCard from "./components/PrintResultCard";
-import AddmitionForm from "./components/AddmitionForm";
+import AdmissionForm from "./components/AddmitionForm";
 import AddmitionContextProvider from "./context/AddmitionContextProvider";
+import PrintAdmissionForm from "./components/PrintAddmitionForm";
 
 
 
@@ -37,7 +38,8 @@ function App() {
         <Route path="/teacherPanel" element={<TeacherPanel/>} />
         <Route path="/resultform" element={<ResultForm />} />
         <Route path="/printResultCard" element={<PrintResultCard/>} />
-        <Route path="/addmitionForm" element={<AddmitionForm/>} />
+        <Route path="/admissionForm" element={<AdmissionForm/>} />
+        <Route path="/printAddmitionForm" element={<PrintAdmissionForm/>} />
        
       </Routes>
       </ResultContextProvider>

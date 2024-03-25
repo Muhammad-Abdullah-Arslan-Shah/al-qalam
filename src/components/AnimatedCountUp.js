@@ -1,4 +1,4 @@
-import React, { useRef,useState } from "react";
+import React, {useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
