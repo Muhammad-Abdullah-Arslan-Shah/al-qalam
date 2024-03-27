@@ -1,9 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { motion,useAnimation} from "framer-motion";
+import { useInView } from "react-intersection-observer"; // Import useInView hook from react-intersection-observer library
 const Footer = () => {
+  const controls = useAnimation(); // Initialize animation controls using useAnimation hook
+  const [ref, inView] = useInView(); // Initialize ref and inView variables using useInView hook
+  // Trigger animation when component comes into view
+  if (inView) {
+    controls.start({ opacity: 1, y: 0 }); // Start animation to set opacity to 1 and x position to 0
+  }
+
   return (
-    <div className="mb-2 text-light" style={{ backgroundColor: "#154c79", padding: "30px 20px", marginTop: "50px" }}>
+    <motion.div
+    className="mb-2 text-light" 
+    style={{ backgroundColor: "#154c79", padding: "30px 20px", marginTop: "50px" }}
+    ref={ref}
+          initial={{ opacity: 0, y: 50 }} // Set initial animation properties for the logo div
+          animate={controls} // Apply animation controls
+          transition={{ duration: 1 }} // Set transition duration
+        >
+   
       <div className="container">
         <div className="row">
           <div className="col-lg-5 col-md-12">
@@ -44,6 +60,8 @@ const Footer = () => {
               </h3>
               <Link to="/" className="d-block my-2">Home page</Link>
               <Link to="/campus" className="d-block my-2">Our Campuses</Link>
+              <Link to="/admissionpolicy" className="d-block my-2">Admission Policy</Link>
+
             </div>
           </div>
           <div className="col-lg-4 col-md-6">
@@ -67,7 +85,8 @@ const Footer = () => {
       <div className="text-center border-top border-warning mt-3 pt-3">
         <small className="my-2">Copyright ©2024 AHS. All Rights Reserved</small>
       </div>
-    </div>
+    
+    </motion.div>
   );
 };
 

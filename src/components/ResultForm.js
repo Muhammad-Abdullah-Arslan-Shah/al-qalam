@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css"; // Importing Bootstrap CSS
 import resultContext from "../context/ResultContext"; // Importing the context for result data
 import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation
 import Alert from './Alert';
+import Header from "./Header";
+import Footer from "./Footer";
 const ResultForm = () => {
   const navigator = useNavigate(); // Initializing useNavigate
   const [alert,setAlert] = useState(null);
@@ -60,11 +62,11 @@ const ResultForm = () => {
 
   return (
     <>
-    
+    <Header/>
       <div className="container">
         {/* Title */}
-        <h3 className="text-center my-3">
-          Please Enter Student Data to Generate Result card
+        <h3 className="text-center my-3 text-success">
+           Please Enter<span className="text-warning"> Student Data to Generate Result card</span> 
         </h3>
         {/* Form container */}
         <div className="form-container border border-dark">
@@ -198,6 +200,7 @@ const ResultForm = () => {
           </Form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

@@ -15,6 +15,7 @@ import PrintResultCard from "./components/PrintResultCard";
 import AdmissionForm from "./components/AddmitionForm";
 import AddmitionContextProvider from "./context/AddmitionContextProvider";
 import PrintAdmissionForm from "./components/PrintAddmitionForm";
+import AdmissionPolicy from "./components/AdmissionPolicy";
 
 
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/printResultCard" element={<PrintResultCard/>} />
         <Route path="/admissionForm" element={<AdmissionForm/>} />
         <Route path="/printAddmitionForm" element={<PrintAdmissionForm/>} />
+        <Route path="/admissionPolicy" element={<AdmissionPolicy/>} />
        
       </Routes>
       </ResultContextProvider>

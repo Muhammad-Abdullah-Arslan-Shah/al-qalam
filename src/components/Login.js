@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { motion} from "framer-motion";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -21,6 +22,11 @@ const Login = () => {
   return (
     <>
       <Header/>
+      <motion.div
+          initial={{ opacity: 0, x: -60 }} // Set initial animation properties for the logo div
+          animate={{ opacity: 1, x: 0 }} // Apply animation controls
+          transition={{ duration: 1.5}} // Set transition duration
+        >
       <div className="login-container">
         <div className="row justify-content-center">
           <div className="col-md-6">
@@ -65,6 +71,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      </motion.div>
       <Footer/>
     </>
   );

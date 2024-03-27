@@ -23,6 +23,7 @@ const SchoolNavbar = () => {
             </NavDropdown>
             <NavDropdown  title="Admissions" id="basic-nav-dropdown" >
               <Link to="/admissionForm" className="dropdown-item fs-5">Online Admission</Link>
+              <Link to="/admissionpolicy" className="dropdown-item fs-5">Admission Policy</Link>
               
             
             </NavDropdown>

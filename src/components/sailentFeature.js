@@ -1,17 +1,45 @@
 import React from 'react';
 import Header from "./Header";
 import Footer from "./Footer";
+import { motion,useAnimation} from "framer-motion";
+import { useInView } from "react-intersection-observer"; 
+
 const SilentFeature = () => {
+  const controls = useAnimation(); // Initialize animation controls using useAnimation hook
+  const [ref, inView] = useInView(); // Initialize ref and inView variables using useInView hook
+  // Trigger animation when component comes into view
+  if (inView) {
+    controls.start({ opacity: 1, x: 0 }); 
+  }
+
+
   return (
     <>
     <Header/>
     <div className="silent-feature bg-white text-dark p-4">
-      <h1 className="text-light bg-success mb-4 text-align-center p-3 ">
-         Echoes of Excellence: The Silent Symphony of Al-Qalam High School
-      </h1>
+    <div className="text-light bg-success mb-4 text-align-center p-3 ">
+    <motion.div
+           
+           initial={{ opacity: 0, y: 50 }} // Set initial animation properties for the logo div
+           animate={{ opacity: 1, y: 0 }} // Apply animation controls
+           transition={{ duration: 1 }} // Set transition duration
+         >
+          
 
+         <h1 className="text-light">Echoes of Excellence: The Silent Symphony of Al-Qalam High School</h1>
+      
+           </motion.div>
+           </div>
+     
+           <motion.div
+          ref={ref}
+          initial={{ opacity: 0, x: -30 }} // Set initial animation properties for the logo div
+          animate={controls} // Apply animation controls
+          transition={{ duration: 0.5}} // Set transition duration
+        >
       <section className="mb-4">
-        <h3 className="text-success">
+     
+         <h3 className="text-success">
           <span className="bullet">&#8226;</span> Tranquil Learning Spaces
         </h3>
         <p>
@@ -19,9 +47,12 @@ const SilentFeature = () => {
           The classrooms are designed with a thoughtful blend of aesthetics and functionality,
           fostering an atmosphere conducive to deep concentration and intellectual growth.
         </p>
+        
+        
       </section>
 
       <section className="mb-4">
+     
         <h3 className="text-success">
           <span className="bullet">&#8226;</span> Educators as Maestros
         </h3>
@@ -30,6 +61,8 @@ const SilentFeature = () => {
           The faculty at Al-Qalam High School believes in the power of mentorship, guiding
           students with a harmonious blend of wisdom, encouragement, and silent support.
         </p>
+          
+        
       </section>
 
       <section className="mb-4">
@@ -91,10 +124,11 @@ const SilentFeature = () => {
           Regular communication, silent collaborations, and shared values create a supportive network ensuring each student's holistic development.
         </p>
       </section>
+      </motion.div>
     </div>
     <Footer/>
     </>
   );
 };
 
-export default SilentFeature;
+export default SilentFeature

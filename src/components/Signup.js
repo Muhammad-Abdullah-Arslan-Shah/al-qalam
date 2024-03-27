@@ -3,10 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import { motion} from "framer-motion";
 const Signup = () => {
   return (
     <>
     <Header/>
+    <motion.div
+          initial={{ opacity: 0, x: -60 }} // Set initial animation properties for the logo div
+          animate={{ opacity: 1, x: 0 }} // Apply animation controls
+          transition={{ duration: 1.5}} // Set transition duration
+        >
     <div style={{ height: "600px" }} className="container mb-4">
       <div className="row justify-content-center">
         <div className="col-md-6">
@@ -41,6 +47,7 @@ const Signup = () => {
         </div>
       </div>
     </div>
+    </motion.div>
     <Footer/>
     </>
   );

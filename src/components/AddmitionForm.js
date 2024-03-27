@@ -3,7 +3,8 @@ import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddmitionContext from "../context/AddmitionContext";
 import { useNavigate } from "react-router-dom";
-
+import Header from "./Header";
+import Footer from "./Footer";
 const AdmissionForm = () => {
   const navigator = useNavigate();
 
@@ -51,10 +52,11 @@ const AdmissionForm = () => {
 
   return (
     <>
+    <Header/>
       <div className="container">
-        <h3 className="text-center my-3">
-          Please Enter Student Data for Admission
-        </h3>
+        <h2 className="text-center my-3 text-success">
+          Please Enter <span  className="text-warning">Student Data for Admission</span>
+        </h2>
         <div className="form-container border border-dark">
           <Form onSubmit ={print} className="p-3">
             <section className="my-4">
@@ -191,7 +193,7 @@ const AdmissionForm = () => {
             </section>
             <div style={{ width: "250px" }} className="mx-auto">
               <Button
-                className="btn btn-lg btn-success mt-3 text-light"
+                className="btn btn-lg  btn-success mt-3 text-light"
                 type="submit"
                 
               >
@@ -201,6 +203,7 @@ const AdmissionForm = () => {
           </Form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

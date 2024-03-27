@@ -50,7 +50,7 @@ const PrintAdmissionForm = () => {
             />
           </div>
           <div>
-            <h2 className="school-name">Al-qalam School</h2>
+            <h2 className="school-name">Al-Qalam School</h2>
             <div className="double-border-container">
               <small className="school-description mx-2 mt-3">
                 Promoting Islamic ideology with a blend of modern technique

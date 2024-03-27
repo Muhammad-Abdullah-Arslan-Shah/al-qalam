@@ -2,10 +2,16 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./Header";
 import Footer from "./Footer";
+import { motion} from "framer-motion";
 const MissionMsg = () => {
   return (
     <>
     <Header/>
+    <motion.div
+          initial={{ opacity: 0, x: -60 }} // Set initial animation properties for the logo div
+          animate={{ opacity: 1, x: 0 }} // Apply animation controls
+          transition={{ duration: 1.5}} // Set transition duration
+        >
     <div className="container mission-container mt-5 p-4 bg-white shadow">
       <div>
         <h1 className="mb-4 text-success">Mission</h1>
@@ -20,6 +26,7 @@ const MissionMsg = () => {
         </p>
       </div>
     </div>
+    </motion.div>
     <Footer/>
     </>
   );

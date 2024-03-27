@@ -3,14 +3,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from 'react-bootstrap';
 import Header from "./Header";
 import Footer from "./Footer";
+import { motion,useAnimation} from "framer-motion";
+import { useInView } from "react-intersection-observer"; // Import useInView hook from react-intersection-observer library
 const PrinMsg = () => {
+  const controls = useAnimation(); // Initialize animation controls using useAnimation hook
+  const [ref, inView] = useInView(); // Initialize ref and inView variables using useInView hook
+  // Trigger animation when component comes into view
+  if (inView) {
+    controls.start({ opacity: 1, y: 0 }); // Start animation to set opacity to 1 and x position to 0
+  }
   return (
     <>
     <Header/>
     <div className='m-4'>
       <Card>
         <Card.Header className='align-center bg-success'>
+        <motion.div
+           
+          initial={{ opacity: 0, y: 50 }} // Set initial animation properties for the logo div
+          animate={{ opacity: 1, y: 0 }} // Apply animation controls
+          transition={{ duration: 1 }} // Set transition duration
+        >
           <h1 className='m-3 p-3 text-light'>Principal Message</h1>
+          </motion.div>
         </Card.Header>
         <Card.Body>
           <p>
@@ -27,10 +42,18 @@ const PrinMsg = () => {
           </p>
           <p>
             Thank you for choosing Al-Qalam High School. We look forward to partnering with you in shaping a bright and promising future for our students.
+        
           </p>
+          <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }} // Set initial animation properties for the logo div
+          animate={controls} // Apply animation controls
+          transition={{ duration: 2 }} // Set transition duration
+        >
           <h6>Sincerely,</h6>
-          <h6>Miss's Akhtar Hussain</h6>
+          <h6>Miss Gulnaz Akhtar</h6>
           <h6>Al-Qalam High School</h6>
+          </motion.div>
         </Card.Body>
       </Card>
     </div>
