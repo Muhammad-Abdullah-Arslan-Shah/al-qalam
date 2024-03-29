@@ -76,7 +76,9 @@ const PrintResultCard = (props) => {
         return "Good effort, but there's room for improvement.";
       case "D":
         return "You're almost there, keep pushing!";
-      case "F":
+      case "E":
+        return "You need to work harder to improve your grade.";
+        case "F":
         return "You need to work harder to improve your grade.";
       default:
         return "Invalid grade. Please provide a valid grade (A+, A, B, C, D, F).";
@@ -227,7 +229,7 @@ const PrintResultCard = (props) => {
             <div className="col-5">
               <p>
                 <b>Class Incharge:</b>{" "}
-                <span>Miss {capitalize(uprdata.teacher)}</span>
+                <span>Ms/Mr {capitalize(uprdata.teacher)}</span>
               </p>
             </div>
           </div>
