@@ -12,8 +12,8 @@ const Footer = () => {
 
   return (
     <motion.div
-    className="mb-2 text-light" 
-    style={{ backgroundColor: "#154c79", padding: "30px 20px", marginTop: "50px" }}
+    className=" text-light mt-3" 
+    style={{ backgroundColor: "#154c79", padding: "30px 20px",  }}
     ref={ref}
           initial={{ opacity: 0, y: 50 }} // Set initial animation properties for the logo div
           animate={controls} // Apply animation controls

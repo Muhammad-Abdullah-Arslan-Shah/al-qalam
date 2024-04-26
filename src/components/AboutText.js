@@ -12,7 +12,7 @@ const AboutText = () => {
   }
 
   return (
-    <div ref={ref} className="container mt-3">
+    <div ref={ref} className=" mt-3">
       <div className="row d-flex justify-content-center  align-items-center">
       <motion.div
           className="col-lg-2 col-md-5 col-5  my-2"
@@ -60,8 +60,8 @@ const AboutText = () => {
       </div>
 
       <div  className="   mt-3 ">
-        <div className="row    ">
-          <div   style={{ marginLeft: "6.8%" ,margin:"2%"}} className="  col-lg-5 col-md-5 p-4 col-5  bg-success">
+        <div className="row  d-flex justify-content-center  ">
+          <div   style={{  margin:"2%"}} className="  col-lg-5 col-md-5 p-4 col-5  bg-success">
             <i className="bi bi-building text-light fs-2 ml-3"></i>
             <span className="text-light text-start fs-2"> Campuses</span>
             <br />
@@ -80,7 +80,7 @@ const AboutText = () => {
             </span>
           </div>
          
-          <div   style={{ marginLeft: "6.8%" ,margin:"2%"}}className="  col-lg-5 col-md-5 p-4 col-5  bg-primary">
+          <div   style={{margin:"2%"}}className="  col-lg-5 col-md-5 p-4 col-5  bg-primary">
             <i className="bi bi-person text-light fs-2 ml-3"></i>
             <span className="text-light text-start fs-2"> Instructors</span>
             <br />

@@ -11,7 +11,7 @@ const RegMsg = () => {
     controls.start({ opacity: 1, y: 0 }); // Start animation to set opacity to 1 and x position to 0
   }
   return (
-    <div ref={ref} className="container my-3 bg-success" style={{ padding: "20px" }}>
+    <div ref={ref} className="  bg-success  d-flex justify-content-center " style={{ padding: "20px" }}>
       <div className="row">
         <div className="col-md-8">
         <motion.div
