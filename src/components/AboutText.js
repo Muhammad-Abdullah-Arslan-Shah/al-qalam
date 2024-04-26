@@ -1,48 +1,48 @@
 import AnimatedCountUp from "./AnimatedCountUp";
-import { motion, useAnimation } from "framer-motion"; // Import motion and useAnimation from Framer Motion library
-import { useInView } from "react-intersection-observer"; // Import useInView hook from react-intersection-observer library
-import logo from "../pictures/logo1.jpg"; // Import the logo image
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import logo from "../pictures/logo1.jpg";
 
 const AboutText = () => {
-  const controls = useAnimation(); // Initialize animation controls using useAnimation hook
-  const [ref, inView] = useInView(); // Initialize ref and inView variables using useInView hook
+  const controls = useAnimation();
+  const [ref, inView] = useInView();
 
-  // Trigger animation when component comes into view
   if (inView) {
-    controls.start({ opacity: 1, x: 0 }); // Start animation to set opacity to 1 and x position to 0
+    controls.start({ opacity: 1, x: 0 });
   }
 
   return (
-    
-    <div ref={ref} className="container mt-3"> {/* Apply ref to the wrapper div */}
-      <h1 className="text-center mt-3 md-3 ">
-        <b>
-          <span className="text-dark">About</span>{" "}
-          <span className="text-success">AHS</span>
-        </b>
-      </h1>
-
-      <div className="row">
-        <motion.div
-          className="col-lg-4 my-4"
-          initial={{ opacity: 0, x: -50 }} // Set initial animation properties for the logo div
-          animate={controls} // Apply animation controls
-          transition={{ duration: 2 }} // Set transition duration
+    <div ref={ref} className="container mt-3">
+      <div className="row d-flex justify-content-center  align-items-center">
+      <motion.div
+          className="col-lg-2 col-md-4 col-4  my-2"
+          initial={{ opacity: 0, x: -50 }}
+          animate={controls}
+          transition={{ duration: 2 }}
         >
           <img
             src={logo}
             alt="logo"
             className="img-fluid"
-            style={{ height: "400px", width: "100%" }}
+            style={{ maxHeight: "50vh", width: "100%" }}
           />
         </motion.div>
+      <h1   style={{ fontSize:"200%" }}className="text-center  my-2 col-lg-3 col-md-6 col-6 ">
+        <b>
+          <span className="text-dark">About</span>{" "}
+          <span className="text-success">AHS</span>
+        </b>
+      </h1>
+      </div>
+      <div >
+        
         <motion.div
-          className="col-lg-8 mt-5"
-          initial={{ opacity: 0, x: 20 }} // Set initial animation properties for the text div
-          animate={controls} // Apply animation controls
-          transition={{ duration: 2 }} // Set transition duration
+          className=" mt-2"
+          initial={{ opacity: 0, x: 20 }}
+          animate={controls}
+          transition={{ duration: 2 }}
         >
-          <p className="fs-5">
+          <p className="fs-5 p-4">
             At Al-Qalam High School, we ignite minds and nurture dreams. Our
             dedicated staff are committed to empowering every student. With
             passion and expertise, they guide and inspire, fostering a
@@ -59,38 +59,49 @@ const AboutText = () => {
         </motion.div>
       </div>
 
-      <div className="container">
-        <div className="row mt-5">
-          <div className="col-lg p-4 m-3 bg-success">
+      <div  className="   mt-5 ">
+        <div className="row   mt-5 ">
+          <div  style={{ marginLeft: "2%" ,margin:"2.3%"}}className="  col-lg-5 col-md-5 p-4 col-5  bg-success">
             <i className="bi bi-building text-light fs-2 ml-3"></i>
             <span className="text-light text-start fs-2"> Campuses</span>
             <br />
-            <span className="text-light text-start fs-1"><AnimatedCountUp end={6} /></span>
+            <span className="text-light text-start fs-1">
+              <AnimatedCountUp end={6} />
+            </span>
           </div>
+        
 
-          <div className="col-lg p-4 m-3 bg-info">
+          <div  style={{ marginLeft: "2%" ,margin:"2.3%"}}className="  col-lg-5 col-md-5 p-4 col-5   bg-info">
             <i className="bi bi-person-arms-up text-light fs-2 ml-3"></i>
             <span className="text-light text-start fs-2"> Students</span>
             <br />
-            <span className="text-light text-start fs-1"><AnimatedCountUp end={1000} /></span>
+            <span className="text-light text-start fs-1">
+              <AnimatedCountUp end={1000} />
+            </span>
           </div>
-
-          <div className="col-lg p-4 m-3 bg-primary">
+         
+          <div  style={{ marginLeft: "2%" ,margin:"2.3%"}}className="  col-lg-5 col-md-5 p-4 col-5  bg-primary">
             <i className="bi bi-person text-light fs-2 ml-3"></i>
             <span className="text-light text-start fs-2"> Instructors</span>
             <br />
-            <span className="text-light text-start fs-1"> <AnimatedCountUp end={200} /></span>
+            <span className="text-light text-start fs-1">
+              
+              <AnimatedCountUp end={200} />
+            </span>
           </div>
-
-          <div className="col-lg p-4 m-3 bg-warning">
+        
+          <div   style={{ marginLeft: "2%" ,margin:"2.3%"}}className="  col-lg-5 col-md-5 p-4 col-5   bg-warning">
             <i className="bi bi-pc-display-horizontal text-light fs-2 ml-3"></i>
-            <span className="text-light text-start fs-2"> Modern Labs</span>
+            <span className="text-light text-start fs-2 "> Modern Labs</span>
             <br />
-            <span className="text-light text-start fs-1"><AnimatedCountUp end={7}/></span>
+            <span className="text-light text-start fs-1 ">
+              <AnimatedCountUp end={7} />
+            </span>
           </div>
+          
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 
