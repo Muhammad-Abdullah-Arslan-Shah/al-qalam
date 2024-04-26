@@ -15,7 +15,7 @@ const AboutText = () => {
     <div ref={ref} className="container mt-3">
       <div className="row d-flex justify-content-center  align-items-center">
       <motion.div
-          className="col-lg-2 col-md-4 col-4  my-2"
+          className="col-lg-2 col-md-5 col-5  my-2"
           initial={{ opacity: 0, x: -50 }}
           animate={controls}
           transition={{ duration: 2 }}
@@ -27,7 +27,7 @@ const AboutText = () => {
             style={{ maxHeight: "50vh", width: "100%" }}
           />
         </motion.div>
-      <h1   style={{ fontSize:"200%" }}className="text-center  my-2 col-lg-3 col-md-6 col-6 ">
+      <h1   style={{ fontSize:"280%" }}className="text-center  my-2 col-lg-3 col-md-9 col-9 ">
         <b>
           <span className="text-dark">About</span>{" "}
           <span className="text-success">AHS</span>
@@ -59,9 +59,9 @@ const AboutText = () => {
         </motion.div>
       </div>
 
-      <div  className="   mt-5 ">
-        <div className="row   mt-5 ">
-          <div  style={{ marginLeft: "2%" ,margin:"2.3%"}}className="  col-lg-5 col-md-5 p-4 col-5  bg-success">
+      <div  className="   mt-3 ">
+        <div className="row    ">
+          <div   style={{ marginLeft: "6.8%" ,margin:"2%"}} className="  col-lg-5 col-md-5 p-4 col-5  bg-success">
             <i className="bi bi-building text-light fs-2 ml-3"></i>
             <span className="text-light text-start fs-2"> Campuses</span>
             <br />
@@ -71,7 +71,7 @@ const AboutText = () => {
           </div>
         
 
-          <div  style={{ marginLeft: "2%" ,margin:"2.3%"}}className="  col-lg-5 col-md-5 p-4 col-5   bg-info">
+          <div   style={{  margin:"2%"}}className="  col-lg-5 col-md-5 p-4 col-5   bg-info">
             <i className="bi bi-person-arms-up text-light fs-2 ml-3"></i>
             <span className="text-light text-start fs-2"> Students</span>
             <br />
@@ -80,7 +80,7 @@ const AboutText = () => {
             </span>
           </div>
          
-          <div  style={{ marginLeft: "2%" ,margin:"2.3%"}}className="  col-lg-5 col-md-5 p-4 col-5  bg-primary">
+          <div   style={{ marginLeft: "6.8%" ,margin:"2%"}}className="  col-lg-5 col-md-5 p-4 col-5  bg-primary">
             <i className="bi bi-person text-light fs-2 ml-3"></i>
             <span className="text-light text-start fs-2"> Instructors</span>
             <br />
@@ -90,7 +90,7 @@ const AboutText = () => {
             </span>
           </div>
         
-          <div   style={{ marginLeft: "2%" ,margin:"2.3%"}}className="  col-lg-5 col-md-5 p-4 col-5   bg-warning">
+          <div    style={{margin:"2%"}}className="  col-lg-5 col-md-5 p-4 col-5   bg-warning">
             <i className="bi bi-pc-display-horizontal text-light fs-2 ml-3"></i>
             <span className="text-light text-start fs-2 "> Modern Labs</span>
             <br />

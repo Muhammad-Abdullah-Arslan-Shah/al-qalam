@@ -25,7 +25,7 @@ const Login = () => {
       <motion.div
           initial={{ opacity: 0, x: -60 }} // Set initial animation properties for the logo div
           animate={{ opacity: 1, x: 0 }} // Apply animation controls
-          transition={{ duration: 1.5}} // Set transition duration
+          transition={{ duration: 1}} // Set transition duration
         >
       <div className="login-container">
         <div className="row justify-content-center">
