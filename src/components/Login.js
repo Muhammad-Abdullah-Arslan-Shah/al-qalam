@@ -27,7 +27,7 @@ const Login = () => {
           animate={{ opacity: 1, x: 0 }} // Apply animation controls
           transition={{ duration: 1}} // Set transition duration
         >
-      <div className="login-container">
+      <div className="login-container p-3">
         <div className="row justify-content-center">
           <div className="col-md-6">
             <div className="card mt-5 bg-light text-dark" style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)' }}>
