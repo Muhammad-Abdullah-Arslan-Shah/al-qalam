@@ -24,11 +24,11 @@ const AboutText = () => {
             src={logo}
             alt="logo"
             className="img-fluid"
-            style={{ maxHeight: "50vh", width: "100%" }}
+            style={{ maxHeight: "30vh", width: "100%" }}
           />
         </motion.div>
         <h1
-          style={{ fontSize: "280%" }}
+          style={{ fontSize: "295%" }}
           className="text-center  my-2 col-lg-3 col-md-9 col-9 "
         >
           <b>
