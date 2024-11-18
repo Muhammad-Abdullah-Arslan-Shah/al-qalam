@@ -16,7 +16,7 @@ const PrintResultCard = () => {
     teacherName: "Mr. Smith",
     studentClass: "10th",
     resultStatus: "Pass",
-    position: "1",
+    position: "1st",
   });
 
   const [marksArray, setMarksArray] = useState([
@@ -30,7 +30,7 @@ const PrintResultCard = () => {
     { subject: "Islamiyat", mark: 100, obtmrk: 92 },
     { subject: "Nazra", mark: 100, obtmrk: 87 },
     { subject: "Drawing", mark: 100, obtmrk: 93 },
-    { subject: "General Knowledge (W.K)", mark: 100, obtmrk: 90 },
+    { subject: "General Knowledge", mark: 100, obtmrk: 90 },
   ]);
 
   const handleModalToggle = () => setShowModal(!showModal);
@@ -238,86 +238,86 @@ const PrintResultCard = () => {
 
       {/* Modal for Editing */}
       <Modal show={showModal} onHide={handleModalToggle}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Result Data</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h5>Student Details</h5>
-          <input
-            type="text"
-            name="studentName"
-            value={studentData.studentName}
-            onChange={handleInputChange}
-            placeholder="Student Name"
-            className="form-control mb-3"
-          />
-          <input
-            type="text"
-            name="studentClass"
-            value={studentData.studentClass}
-            onChange={handleInputChange}
-            placeholder="Class"
-            className="form-control mb-3"
-          />
-          <input
-            type="text"
-            name="teacherName"
-            value={studentData.teacherName}
-            onChange={handleInputChange}
-            placeholder="Teacher Name"
-            className="form-control mb-3"
-          />
-          <h5>Subjects</h5>
-          {marksArray.map((mark, index) => (
-            <div key={index} className="mb-3">
-               <button
-                className="btn my-1 btn-danger"
-                onClick={() => handleRemoveSubject(index)}
-              >
-                X
-              </button>
-              <input
-                type="text"
-                value={mark.subject}
-                onChange={(e) =>
-                  handleMarksChange(index, "subject", e.target.value)
-                }
-                placeholder="Subject"
-                className="form-control mr-2"
-              />
-             
-              <input
-                type="number"
-                value={mark.mark}
-                onChange={(e) =>
-                  handleMarksChange(index, "mark", e.target.value)
-                }
-                placeholder="Total Marks"
-                className="form-control mr-2"
-              />
-              <input
-                type="number"
-                value={mark.obtmrk}
-                onChange={(e) =>
-                  handleMarksChange(index, "obtmrk", e.target.value)
-                }
-                placeholder="Obtained Marks"
-                className="form-control mr-2"
-              />
-              
-            </div>
-          ))}
-          <button className="btn btn-secondary " onClick={handleAddSubject}>
-            Add Subject
-          </button>
-        </Modal.Body>
-        <Modal.Footer>
-        <div className="text-center mt-2" id="action-buttons">
-  <button className="btn btn-lg btn-primary mx-4" onClick={handleModalToggle}>Close</button>
- 
-</div>
-        </Modal.Footer>
-      </Modal>
+  <Modal.Header closeButton>
+    <Modal.Title>Edit Result Data</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <h5>Student Details</h5>
+    <input
+      type="text"
+      name="studentName"
+      value={studentData.studentName}
+      onChange={handleInputChange}
+      placeholder="Student Name"
+      className="form-control mb-3"
+    />
+    <input
+      type="text"
+      name="studentClass"
+      value={studentData.studentClass}
+      onChange={handleInputChange}
+      placeholder="Class"
+      className="form-control mb-3"
+    />
+    <input
+      type="text"
+      name="teacherName"
+      value={studentData.teacherName}
+      onChange={handleInputChange}
+      placeholder="Teacher Name"
+      className="form-control mb-3"
+    />
+    <h5>Subjects</h5>
+    {marksArray.map((mark, index) => (
+      <div key={index} className="mb-3 d-flex align-items-center">
+        <button
+          className="btn my-1 mx-4 btn-danger mr-auto"
+          onClick={() => handleRemoveSubject(index)}
+        >
+          X
+        </button>
+        <input
+          type="text"
+          value={mark.subject}
+          onChange={(e) =>
+            handleMarksChange(index, "subject", e.target.value)
+          }
+          placeholder="Subject"
+          className="form-control mx-2 w-100"
+        />
+        <input
+          type="number"
+          value={mark.mark}
+          onChange={(e) =>
+            handleMarksChange(index, "mark", e.target.value)
+          }
+          placeholder="Total Marks"
+          className="form-control mr-2"
+        />
+        <input
+          type="number"
+          value={mark.obtmrk}
+          onChange={(e) =>
+            handleMarksChange(index, "obtmrk", e.target.value)
+          }
+          placeholder="Obtained Marks"
+          className="form-control mx-2"
+        />
+      </div>
+    ))}
+    <button className="btn btn-secondary" onClick={handleAddSubject}>
+      Add Subject
+    </button>
+  </Modal.Body>
+  <Modal.Footer>
+    <div className="text-center mt-2" id="action-buttons">
+      <button className="btn btn-lg btn-primary mx-4" onClick={handleModalToggle}>
+        Close
+      </button>
+    </div>
+  </Modal.Footer>
+</Modal>
+
     </>
   );
 };
