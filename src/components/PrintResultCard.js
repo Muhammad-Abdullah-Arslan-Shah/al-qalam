@@ -8,15 +8,14 @@ import html2canvas from "html2canvas"; // For screenshot
 import jsPDF from "jspdf"; // For PDF download
 import prinSign from "../pictures/prinSign.png"; // Principal signature image
 
-
 const PrintResultCard = () => {
   const [showModal, setShowModal] = useState(false);
   const [studentData, setStudentData] = useState({
-    studentName: "John Doe",
-    teacherName: "Mr. Smith",
-    studentClass: "10th",
-    resultStatus: "Pass",
-    position: "1st",
+    studentName: "",
+    teacherName: "",
+    studentClass: "",
+    resultStatus: "",
+    position: "",
   });
 
   const [marksArray, setMarksArray] = useState([
@@ -47,10 +46,7 @@ const PrintResultCard = () => {
   };
 
   const handleAddSubject = () => {
-    setMarksArray([
-      ...marksArray,
-      { subject: "", mark: 100, obtmrk: 0 },
-    ]);
+    setMarksArray([...marksArray, { subject: "", mark: 100, obtmrk: 0 }]);
   };
   const handleRemoveSubject = (index) => {
     setMarksArray(marksArray.filter((_, i) => i !== index));
@@ -113,7 +109,10 @@ const PrintResultCard = () => {
   return (
     <>
       {/* Result Card */}
-      <div className="container m-5 p-2" style={{ width: "800px", margin: "auto" }}>
+      <div
+        className="container m-5 p-2"
+        style={{ width: "800px", margin: "auto" }}
+      >
         <div
           className="container-fixed double-border-container p-3"
           id="result-card"
@@ -124,34 +123,51 @@ const PrintResultCard = () => {
             padding: "15px",
           }}
         >
-           <div className="result-header d-flex justify-content-center align-items-center mb-4">
-          <div className="school-logo-container">
-            <img
-              src={logo}
-              alt="School Logo"
-              className="school-logo"
-              style={{ width: "100px", height: "auto" }}
-            />
-          </div>
-          <div>
-            <h2 className="school-name">Al-Qalam School</h2>
-            <div className="double-border-container">
-              <small className="school-description mx-2 mt-3">
-                Promoting Islamic ideology with a blend of modern technique
-              </small>
+          <div className="result-header d-flex justify-content-center align-items-center mb-4">
+            <div className="school-logo-container">
+              <img
+                src={logo}
+                alt="School Logo"
+                className="school-logo"
+                style={{ width: "100px", height: "auto" }}
+              />
+            </div>
+            <div>
+              <h2 className="school-name">Al-Qalam School</h2>
+              <div className="double-border-container">
+                <small className="school-description mx-2 mt-3">
+                  Promoting Islamic ideology with a blend of modern technique
+                </small>
+              </div>
             </div>
           </div>
-        </div>
 
           {/* Student Details Section */}
           <div className="student-details d-flex justify-content-between mb-3">
             <div>
-              <p><strong>Student Name:</strong> {studentData.studentName}</p>
-              <p><strong>Class:</strong> {studentData.studentClass}</p>
+              <p>
+                <strong>Student Name:</strong> {studentData.studentName}
+              </p>
+              <p>
+                <strong>Class:</strong> {studentData.studentClass}
+              </p>
             </div>
             <div>
-              <p><strong>Result Status:</strong> <span className={studentData.resultStatus === "Pass" ? "text-success" : "text-danger"}>{studentData.resultStatus}</span></p>
-              <p><strong>Position:</strong> {studentData.position}</p>
+              <p>
+                <strong>Result Status:</strong>{" "}
+                <span
+                  className={
+                    studentData.resultStatus === "Pass"
+                      ? "text-success"
+                      : "text-danger"
+                  }
+                >
+                  {studentData.resultStatus}
+                </span>
+              </p>
+              <p>
+                <strong>Position:</strong> {studentData.position}
+              </p>
             </div>
           </div>
 
@@ -181,7 +197,9 @@ const PrintResultCard = () => {
                 );
               })}
               <tr>
-                <td><strong>Total</strong></td>
+                <td>
+                  <strong>Total</strong>
+                </td>
                 <td>{totalMarks()}</td>
                 <td>{ObtMarks()}</td>
                 <td>{getPercentage(ObtMarks(), totalMarks())}%</td>
@@ -192,132 +210,158 @@ const PrintResultCard = () => {
 
           {/* Result Summary */}
           <div className="result-summary">
-  <p>
-    <strong>Comments:</strong> {getTeacherComments(grade)} 
-    <span className="float-end" style={{ marginRight: '40px' }}>
-      <strong>Teacher Name: </strong>{" "}{studentData.teacherName}
-    </span>
-  </p>
-</div>
+            <p>
+              <strong>Comments:</strong> {getTeacherComments(grade)}
+              <span className="float-end" style={{ marginRight: "40px" }}>
+                <strong>Teacher Name: </strong> {studentData.teacherName}
+              </span>
+            </p>
+          </div>
 
-{/* Footer with Teacher and Principal Signatures */}
-<div className="row" style={{ marginTop: "45px" }}>
-  <div className="col-6 d-flex justify-content-start mt-2">
-    <p>
-      <b>Teacher's Signature:</b> <span>_______________</span>
-    </p>
-  </div>
-  <div className="col-6 d-flex justify-content-end mt-2">
-    <p>
-      <b>Principal's Signature:</b>{" "}
-      <span>
-        <img
-          style={{ height: "50px", width: "50px" }}
-          src={prinSign}
-          alt="principal sign"
-        />
-      </span>
-    </p>
-  </div>
-</div>
-
-
-
-
-
-
-
+          {/* Footer with Teacher and Principal Signatures */}
+          <div className="row" style={{ marginTop: "45px" }}>
+            <div className="col-6 d-flex justify-content-start mt-2">
+              <p>
+                <b>Teacher's Signature:</b> <span>_______________</span>
+              </p>
+            </div>
+            <div className="col-6 d-flex justify-content-end mt-2">
+              <p>
+                <b>Principal's Signature:</b>{" "}
+                <span>
+                  <img
+                    style={{ height: "50px", width: "50px" }}
+                    src={prinSign}
+                    alt="principal sign"
+                  />
+                </span>
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Buttons */}
         <div className="text-center mt-2" id="action-buttons">
-          <button className="btn btn-lg mx-2 btn-primary" onClick={handleModalToggle}>Edit Data</button>
-          <button className="btn btn-lg mx-2 btn-success ml-3" onClick={handleDownload}>Download PDF</button>
+          <button
+            className="btn btn-lg mx-2 btn-primary"
+            onClick={handleModalToggle}
+          >
+            Edit Data
+          </button>
+          <button
+            className="btn btn-lg mx-2 btn-success ml-3"
+            onClick={handleDownload}
+          >
+            Download PDF
+          </button>
         </div>
       </div>
 
       {/* Modal for Editing */}
       <Modal show={showModal} onHide={handleModalToggle}>
-  <Modal.Header closeButton>
-    <Modal.Title>Edit Result Data</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <h5>Student Details</h5>
-    <input
-      type="text"
-      name="studentName"
-      value={studentData.studentName}
-      onChange={handleInputChange}
-      placeholder="Student Name"
-      className="form-control mb-3"
-    />
-    <input
-      type="text"
-      name="studentClass"
-      value={studentData.studentClass}
-      onChange={handleInputChange}
-      placeholder="Class"
-      className="form-control mb-3"
-    />
-    <input
-      type="text"
-      name="teacherName"
-      value={studentData.teacherName}
-      onChange={handleInputChange}
-      placeholder="Teacher Name"
-      className="form-control mb-3"
-    />
-    <h5>Subjects</h5>
-    {marksArray.map((mark, index) => (
-      <div key={index} className="mb-3 d-flex align-items-center">
-        <button
-          className="btn my-1 mx-4 btn-danger mr-auto"
-          onClick={() => handleRemoveSubject(index)}
-        >
-          X
-        </button>
-        <input
-          type="text"
-          value={mark.subject}
-          onChange={(e) =>
-            handleMarksChange(index, "subject", e.target.value)
-          }
-          placeholder="Subject"
-          className="form-control mx-2 w-100"
-        />
-        <input
-          type="number"
-          value={mark.mark}
-          onChange={(e) =>
-            handleMarksChange(index, "mark", e.target.value)
-          }
-          placeholder="Total Marks"
-          className="form-control mr-2"
-        />
-        <input
-          type="number"
-          value={mark.obtmrk}
-          onChange={(e) =>
-            handleMarksChange(index, "obtmrk", e.target.value)
-          }
-          placeholder="Obtained Marks"
-          className="form-control mx-2"
-        />
-      </div>
-    ))}
-    <button className="btn btn-secondary" onClick={handleAddSubject}>
-      Add Subject
-    </button>
-  </Modal.Body>
-  <Modal.Footer>
-    <div className="text-center mt-2" id="action-buttons">
-      <button className="btn btn-lg btn-primary mx-4" onClick={handleModalToggle}>
-        Close
-      </button>
-    </div>
-  </Modal.Footer>
-</Modal>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Result Data</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h5>Student Details</h5>
+          <input
+            type="text"
+            name="studentName"
+            value={studentData.studentName}
+            onChange={handleInputChange}
+            placeholder="Student Name"
+            className="form-control mb-3"
+          />
+          <input
+            type="text"
+            name="studentClass"
+            value={studentData.studentClass}
+            onChange={handleInputChange}
+            placeholder="Class"
+            className="form-control mb-3"
+          />
+          <select
+            name="resultStatus"
+            value={studentData.resultStatus}
+            onChange={handleInputChange}
+            className="form-control mb-3"
+          >
+            <option value="">Select Result Status</option>
+            <option value="Pass">Pass</option>
+            <option value="Fail">Fail</option>
+          </select>
 
+          <input
+  type="text"
+  name="position"  // Removed the leading space
+  value={studentData.position}
+  onChange={handleInputChange}
+  placeholder="Position"
+  className="form-control mb-3"
+/>
+
+
+          <input
+            type="text"
+            name="teacherName"
+            value={studentData.teacherName}
+            onChange={handleInputChange}
+            placeholder="Teacher Name"
+            className="form-control mb-3"
+          />
+          <h5>Subjects</h5>
+          {marksArray.map((mark, index) => (
+            <div key={index} className="mb-3 d-flex align-items-center">
+              <button
+                className="btn my-1 mx-4 btn-danger mr-auto"
+                onClick={() => handleRemoveSubject(index)}
+              >
+                X
+              </button>
+              <input
+                type="text"
+                value={mark.subject}
+                onChange={(e) =>
+                  handleMarksChange(index, "subject", e.target.value)
+                }
+                placeholder="Subject"
+                className="form-control mx-2 w-100"
+              />
+              <input
+                type="number"
+                value={mark.mark}
+                onChange={(e) =>
+                  handleMarksChange(index, "mark", e.target.value)
+                }
+                placeholder="Total Marks"
+                className="form-control mr-2"
+              />
+              <input
+                type="number"
+                value={mark.obtmrk}
+                onChange={(e) =>
+                  handleMarksChange(index, "obtmrk", e.target.value)
+                }
+                placeholder="Obtained Marks"
+                className="form-control mx-2"
+              />
+            </div>
+          ))}
+          <button className="btn btn-secondary" onClick={handleAddSubject}>
+            Add Subject
+          </button>
+        </Modal.Body>
+        <Modal.Footer>
+          <div className="text-center mt-2" id="action-buttons">
+            <button
+              className="btn btn-lg btn-primary mx-4"
+              onClick={handleModalToggle}
+            >
+              Close
+            </button>
+          </div>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
