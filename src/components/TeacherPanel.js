@@ -5,7 +5,7 @@ const TeacherPanel = () => {
 
   let navigate = useNavigate();
     const navToResultForm = ()=>{
-navigate("/resultform");
+navigate("/PrintResultCard");
     }
   return (
     <>

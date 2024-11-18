@@ -8,9 +8,9 @@ import SailentFeature from "./components/sailentFeature";
 import OurCampuses from "./components/OurCampuses";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import ResultForm from "./components/ResultForm";
+
 import TeacherPanel from "./components/TeacherPanel";
-import ResultContextProvider from './context/ResultContextProvider'
+
 import PrintResultCard from "./components/PrintResultCard";
 import AdmissionForm from "./components/AddmitionForm";
 import AddmitionContextProvider from "./context/AddmitionContextProvider";
@@ -26,7 +26,7 @@ function App() {
     <div>
    
    <AddmitionContextProvider>
-   <ResultContextProvider> 
+  
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -37,14 +37,14 @@ function App() {
         <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/teacherPanel" element={<TeacherPanel/>} />
-        <Route path="/resultform" element={<ResultForm />} />
+        
         <Route path="/printResultCard" element={<PrintResultCard/>} />
         <Route path="/admissionForm" element={<AdmissionForm/>} />
         <Route path="/printAddmitionForm" element={<PrintAdmissionForm/>} />
         <Route path="/admissionPolicy" element={<AdmissionPolicy/>} />
        
       </Routes>
-      </ResultContextProvider>
+      
       </AddmitionContextProvider> 
     
     </div>

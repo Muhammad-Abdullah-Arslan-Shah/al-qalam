@@ -23,3 +23,15 @@
 .double-border-container {
   border: 4px double #000;
 }
+
+@media print {
+  #action-buttons {
+    display: none;
+  }
+}
+/* Result Card Custom Styling */
+.container-fixed {
+  border: 8px double #000; /* Double border */
+  padding: 15px;
+}
+

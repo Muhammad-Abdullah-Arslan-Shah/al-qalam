@@ -1,135 +1,123 @@
-import React, { useContext } from "react";
-import logo from "../pictures/logo1.jpg"; // Importing the school logo
-import "../resultCard.css"; // Importing CSS styles
-import resultContext from "../context/ResultContext"; // Importing the context for result data
-import html2canvas from "html2canvas"; // Importing html2canvas library for capturing DOM content
-import jsPDF from "jspdf"; // Importing jsPDF library for generating PDFs
-import prinSign from "../pictures/prinSign.png"; // Importing the principal's signature image
+import React, { useState } from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import logo from "../pictures/logo1.jpg"; // Your logo file
+import "../resultCard.css"; // Your custom styles
+import html2canvas from "html2canvas"; // For screenshot
+import jsPDF from "jspdf"; // For PDF download
+import prinSign from "../pictures/prinSign.png"; // Principal signature image
 
-const PrintResultCard = (props) => {
-  // Using useContext hook to access data from context
-  const { uprdata, marksArray } = useContext(resultContext);
 
-  // Function to calculate total marks
-  const totalMarks = () => {
-    let total = 0;
-    for (let i = 0; i < marksArray.length; i++) {
-      total += Number(marksArray[i].mark);
-    }
-    return total;
+const PrintResultCard = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [studentData, setStudentData] = useState({
+    studentName: "John Doe",
+    teacherName: "Mr. Smith",
+    studentClass: "10th",
+    resultStatus: "Pass",
+    position: "1",
+  });
+
+  const [marksArray, setMarksArray] = useState([
+    { subject: "Math", mark: 100, obtmrk: 95 },
+    { subject: "English", mark: 100, obtmrk: 85 },
+    { subject: "Science", mark: 100, obtmrk: 90 },
+    { subject: "History", mark: 100, obtmrk: 80 },
+  ]);
+
+  const handleModalToggle = () => setShowModal(!showModal);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setStudentData({ ...studentData, [name]: value });
   };
 
-  // Function to calculate obtained marks
-  const ObtMarks = () => {
-    let Obt = 0;
-    for (let i = 0; i < marksArray.length; i++) {
-      Obt += Number(marksArray[i].obtmrk);
-    }
-    return Obt;
+  const handleMarksChange = (index, field, value) => {
+    const updatedMarks = [...marksArray];
+    updatedMarks[index][field] = value;
+    setMarksArray(updatedMarks);
   };
 
-  // Function to capitalize strings
-  function capitalize(str) {
-    if (!str) return ""; // Return an empty string if str is undefined or null
-    return str.replace(/\b\w/g, function (char) {
-      return char.toUpperCase();
-    });
-  }
-
-  // Function to calculate percentage
-  const getPercentage = (obtainedMarks, totalMarks) => {
-    return ((obtainedMarks / totalMarks) * 100).toFixed(0);
+  const handleAddSubject = () => {
+    setMarksArray([
+      ...marksArray,
+      { subject: "", mark: 100, obtmrk: 0 },
+    ]);
+  };
+  const handleRemoveSubject = (index) => {
+    setMarksArray(marksArray.filter((_, i) => i !== index));
   };
 
-  // Function to get grade based on percentage
+  const totalMarks = () =>
+    marksArray.reduce((total, item) => total + Number(item.mark), 0);
+
+  const ObtMarks = () =>
+    marksArray.reduce((total, item) => total + Number(item.obtmrk), 0);
+
+  const getPercentage = (obtainedMarks, totalMarks) =>
+    ((obtainedMarks / totalMarks) * 100).toFixed(0);
+
   const getGrade = (percentage) => {
-    if (percentage >= 90) {
-      return "A+";
-    } else if (percentage >= 80) {
-      return "A";
-    } else if (percentage >= 70) {
-      return "B";
-    } else if (percentage >= 60) {
-      return "C";
-    } else if (percentage >= 50) {
-      return "D";
-    } else if (percentage >= 40) {
-      return "E";
-    } else {
-      return "F";
-    }
+    if (percentage >= 90) return "A+";
+    if (percentage >= 80) return "A";
+    if (percentage >= 70) return "B";
+    if (percentage >= 60) return "C";
+    if (percentage >= 50) return "D";
+    if (percentage >= 40) return "E";
+    return "F";
   };
 
-  // Getting grade based on obtained marks and total marks
-  let grade = getGrade(getPercentage(ObtMarks(), totalMarks()));
+  const getTeacherComments = (grade) => {
+    const comments = {
+      "A+": "Outstanding performance! You're excelling at the highest level!",
+      A: "Excellent job! Keep up the good work!",
+      B: "Well done! You're doing great!",
+      C: "Good effort, but there's room for improvement.",
+      D: "You're almost there, keep pushing!",
+      E: "You need to work harder to improve your grade.",
+      F: "Significant improvement is needed.",
+    };
+    return comments[grade] || "Invalid grade.";
+  };
 
-  // Function to get teacher comments based on grade
-  function getTeacherComments(grade) {
-    switch (grade) {
-      case "A+":
-        return "Outstanding performance! You're excelling at the highest level!";
-      case "A":
-        return "Excellent job! Keep up the good work!";
-      case "B":
-        return "Well done! You're doing great!";
-      case "C":
-        return "Good effort, but there's room for improvement.";
-      case "D":
-        return "You're almost there, keep pushing!";
-      case "E":
-        return "You need to work harder to improve your grade.";
-        case "F":
-        return "You need to work harder to improve your grade.";
-      default:
-        return "Invalid grade. Please provide a valid grade (A+, A, B, C, D, F).";
-    }
-  }
-
-  // Function to handle download of PDF
   const handleDownload = () => {
     const input = document.getElementById("result-card");
-
-    // Using html2canvas to capture the DOM content
-    html2canvas(input, { scrollY: -window.scrollY, scale: 3 }) // Adjust the scale factor as needed for better image quality
-      .then((canvas) => {
+    html2canvas(input, { scrollY: -window.scrollY, scale: 3 }).then(
+      (canvas) => {
         const imgData = canvas.toDataURL("image/jpeg");
-
-        // Creating a PDF using jsPDF
         const pdf = new jsPDF({
-          orientation: "portrait", // or 'landscape'
+          orientation: "portrait",
           unit: "mm",
           format: "A4",
         });
-
-        // Calculating dimensions for A4 size
-        const imgWidth = 180; // Adjusted width with margins
-        const imgHeight = 260; // Adjusted height with margins
-
-        // Add margins to position the image in the center
+        const imgWidth = 180;
+        const imgHeight = 260;
         const x = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
         const y = (pdf.internal.pageSize.getHeight() - imgHeight) / 2;
-
-        // Adding image to PDF
         pdf.addImage(imgData, "JPEG", x, y, imgWidth, imgHeight);
-
-        // Saving PDF
-        pdf.save("result_card.pdf");
-      });
+        pdf.save(`${studentData.studentName}_result_card.pdf`);
+      }
+    );
   };
 
-  // JSX rendering of the result card
+  const grade = getGrade(getPercentage(ObtMarks(), totalMarks()));
+
   return (
-    <div
-      className="container m-5 p-2"
-      style={{ width: "800px", margin: "auto" }}
-    >
-      <div
-        className="container-fixed double-border-container p-2"
-        id="result-card"
-        style={{ width: "700px", margin: "auto" }}
-      >
-        {/* School header */}
-        <div className="result-header d-flex justify-content-center align-items-center mb-4">
+    <>
+      {/* Result Card */}
+      <div className="container m-5 p-2" style={{ width: "800px", margin: "auto" }}>
+        <div
+          className="container-fixed double-border-container p-3"
+          id="result-card"
+          style={{
+            width: "700px",
+            margin: "auto",
+            border: "4px double #000", // Double border
+            padding: "15px",
+          }}
+        >
+           <div className="result-header d-flex justify-content-center align-items-center mb-4">
           <div className="school-logo-container">
             <img
               src={logo}
@@ -139,7 +127,7 @@ const PrintResultCard = (props) => {
             />
           </div>
           <div>
-            <h2 className="school-name">Al-qalam School</h2>
+            <h2 className="school-name">Al-Qalam School</h2>
             <div className="double-border-container">
               <small className="school-description mx-2 mt-3">
                 Promoting Islamic ideology with a blend of modern technique
@@ -147,122 +135,183 @@ const PrintResultCard = (props) => {
             </div>
           </div>
         </div>
-        <h2 className="m-4 text-center">Final Term Examination 2024</h2>
-        {/* Student details */}
-        <div className="table-responsive mt-4">
-          <table className="table">
-            <tbody>
-              <tr>
-                <td>
-                  <b>Student Name:</b> <span>{capitalize(uprdata.name)}</span>
-                </td>
-                <td>
-                  <b>Class:</b> <span>{capitalize(uprdata.class)}</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Result Status:</b> <span>{uprdata.resultStatus}</span>
-                </td>
-                <td>
-                  <b>Position:</b> <span>{capitalize(uprdata.possition)}</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
 
-        {/* Marks table */}
-        <div className="table-responsive mt-4">
+          {/* Student Details Section */}
+          <div className="student-details d-flex justify-content-between mb-3">
+            <div>
+              <p><strong>Student Name:</strong> {studentData.studentName}</p>
+              <p><strong>Class:</strong> {studentData.studentClass}</p>
+            </div>
+            <div>
+              <p><strong>Result Status:</strong> <span className={studentData.resultStatus === "Pass" ? "text-success" : "text-danger"}>{studentData.resultStatus}</span></p>
+              <p><strong>Position:</strong> {studentData.position}</p>
+            </div>
+          </div>
+
+          {/* Marks Table with Total Marks, Percentage, and Grades */}
           <table className="table table-bordered">
-            <thead className="thead-dark">
+            <thead>
               <tr>
                 <th>Subject</th>
-                <th>Marks</th>
+                <th>Total Marks</th>
                 <th>Obtained Marks</th>
                 <th>Percentage</th>
                 <th>Grade</th>
               </tr>
             </thead>
             <tbody>
-              {marksArray.map((element, index) => (
-                <tr key={index}>
-                  <td>{element.subject}</td>
-                  <td>{element.mark}</td>
-                  <td>{element.obtmrk}</td>
-                  <td>{getPercentage(element.obtmrk, element.mark)}%</td>
-                  <td>
-                    {getGrade(getPercentage(element.obtmrk, element.mark))}
-                  </td>
-                </tr>
-              ))}
-              {/* Total marks row */}
+              {marksArray.map((mark, index) => {
+                const subjectPercentage = getPercentage(mark.obtmrk, mark.mark);
+                const subjectGrade = getGrade(subjectPercentage);
+                return (
+                  <tr key={index}>
+                    <td>{mark.subject}</td>
+                    <td>{mark.mark}</td>
+                    <td>{mark.obtmrk}</td>
+                    <td>{subjectPercentage}%</td>
+                    <td>{subjectGrade}</td>
+                  </tr>
+                );
+              })}
               <tr>
-                <td>
-                  <b>Total</b>
-                </td>
-                <td>
-                  <b>{totalMarks()}</b>
-                </td>
-                <td>
-                  <b>{ObtMarks()}</b>
-                </td>
-                <td>
-                  <b>{getPercentage(ObtMarks(), totalMarks())}%</b>
-                </td>
-                <td>
-                  <b>{grade}</b>
-                </td>
+                <td><strong>Total</strong></td>
+                <td>{totalMarks()}</td>
+                <td>{ObtMarks()}</td>
+                <td>{getPercentage(ObtMarks(), totalMarks())}%</td>
+                <td>{grade}</td>
               </tr>
             </tbody>
           </table>
+
+          {/* Result Summary */}
+          <div className="result-summary">
+  <p>
+    <strong>Comments:</strong> {getTeacherComments(grade)} 
+    <span className="float-end" style={{ marginRight: '40px' }}>
+      <strong>Teacher Name: {studentData.teacherName}</strong>
+    </span>
+  </p>
+</div>
+
+{/* Footer with Teacher and Principal Signatures */}
+<div className="row" style={{ marginTop: "45px" }}>
+  <div className="col-6 d-flex justify-content-start mt-2">
+    <p>
+      <b>Teacher's Signature:</b> <span>_______________</span>
+    </p>
+  </div>
+  <div className="col-6 d-flex justify-content-end mt-2">
+    <p>
+      <b>Principal's Signature:</b>{" "}
+      <span>
+        <img
+          style={{ height: "50px", width: "50px" }}
+          src={prinSign}
+          alt="principal sign"
+        />
+      </span>
+    </p>
+  </div>
+</div>
+
+
+
+
+
+
+
         </div>
 
-        {/* Teacher comments and signatures */}
-        <div className="text-center mt-4">
-          <div className="row">
-            <div className="col-7">
-              <p>
-                <b>Teacher Comment:</b> <span>{getTeacherComments(grade)}</span>
-              </p>
-            </div>
-            <div className="col-5">
-              <p>
-                <b>Class Incharge:</b>{" "}
-                <span>Ms/Mr {capitalize(uprdata.teacher)}</span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="text-center mt-4">
-          <div className="row">
-            <div className="col-6">
-              <p>
-                <b>Teacher's Signature:</b> <span>_______________</span>
-              </p>
-            </div>
-            <div className="col-6">
-              <p>
-                <b>Principal's Signature:</b>{" "}
-                <span>
-                  <img
-                    style={{ height: "50px", width: "50px" }}
-                    src={prinSign}
-                    alt="principal sign"
-                  ></img>
-                </span>
-              </p>
-            </div>
-          </div>
+        {/* Buttons */}
+        <div className="text-center mt-2" id="action-buttons">
+          <button className="btn btn-lg mx-2 btn-primary" onClick={handleModalToggle}>Edit Data</button>
+          <button className="btn btn-lg mx-2 btn-success ml-3" onClick={handleDownload}>Download PDF</button>
         </div>
       </div>
-      {/* Button to download PDF */}
-      <div className="text-center mt-2">
-        <button className="btn btn-lg btn-success" onClick={handleDownload}>
-          Download PDF
-        </button>
-      </div>
-    </div>
+
+      {/* Modal for Editing */}
+      <Modal show={showModal} onHide={handleModalToggle}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Result Data</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h5>Student Details</h5>
+          <input
+            type="text"
+            name="studentName"
+            value={studentData.studentName}
+            onChange={handleInputChange}
+            placeholder="Student Name"
+            className="form-control mb-3"
+          />
+          <input
+            type="text"
+            name="studentClass"
+            value={studentData.studentClass}
+            onChange={handleInputChange}
+            placeholder="Class"
+            className="form-control mb-3"
+          />
+          <input
+            type="text"
+            name="teacherName"
+            value={studentData.teacherName}
+            onChange={handleInputChange}
+            placeholder="Teacher Name"
+            className="form-control mb-3"
+          />
+          <h5>Subjects</h5>
+          {marksArray.map((mark, index) => (
+            <div key={index} className="mb-3">
+               <button
+                className="btn my-1 btn-danger"
+                onClick={() => handleRemoveSubject(index)}
+              >
+                X
+              </button>
+              <input
+                type="text"
+                value={mark.subject}
+                onChange={(e) =>
+                  handleMarksChange(index, "subject", e.target.value)
+                }
+                placeholder="Subject"
+                className="form-control mr-2"
+              />
+             
+              <input
+                type="number"
+                value={mark.mark}
+                onChange={(e) =>
+                  handleMarksChange(index, "mark", e.target.value)
+                }
+                placeholder="Total Marks"
+                className="form-control mr-2"
+              />
+              <input
+                type="number"
+                value={mark.obtmrk}
+                onChange={(e) =>
+                  handleMarksChange(index, "obtmrk", e.target.value)
+                }
+                placeholder="Obtained Marks"
+                className="form-control mr-2"
+              />
+              
+            </div>
+          ))}
+          <button className="btn btn-secondary " onClick={handleAddSubject}>
+            Add Subject
+          </button>
+        </Modal.Body>
+        <Modal.Footer>
+        <div className="text-center mt-2" id="action-buttons">
+  <button className="btn btn-lg btn-primary mx-4" onClick={handleModalToggle}>Close</button>
+ 
+</div>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 
