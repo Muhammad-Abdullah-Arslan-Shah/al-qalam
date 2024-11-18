@@ -21,9 +21,16 @@ const PrintResultCard = () => {
 
   const [marksArray, setMarksArray] = useState([
     { subject: "Math", mark: 100, obtmrk: 95 },
-    { subject: "English", mark: 100, obtmrk: 85 },
+    { subject: "English A", mark: 100, obtmrk: 85 },
+    { subject: "English B", mark: 100, obtmrk: 80 },
     { subject: "Science", mark: 100, obtmrk: 90 },
     { subject: "History", mark: 100, obtmrk: 80 },
+    { subject: "Urdu A", mark: 100, obtmrk: 88 },
+    { subject: "Urdu B", mark: 100, obtmrk: 84 },
+    { subject: "Islamiyat", mark: 100, obtmrk: 92 },
+    { subject: "Nazra", mark: 100, obtmrk: 87 },
+    { subject: "Drawing", mark: 100, obtmrk: 93 },
+    { subject: "General Knowledge (W.K)", mark: 100, obtmrk: 90 },
   ]);
 
   const handleModalToggle = () => setShowModal(!showModal);
@@ -188,7 +195,7 @@ const PrintResultCard = () => {
   <p>
     <strong>Comments:</strong> {getTeacherComments(grade)} 
     <span className="float-end" style={{ marginRight: '40px' }}>
-      <strong>Teacher Name: {studentData.teacherName}</strong>
+      <strong>Teacher Name: </strong>{" "}{studentData.teacherName}
     </span>
   </p>
 </div>
