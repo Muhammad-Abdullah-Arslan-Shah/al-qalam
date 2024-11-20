@@ -73,7 +73,7 @@ const PrintResultCard = () => {
 
   const getTeacherComments = (grade) => {
     const comments = {
-      "A+": "Outstanding performance! You're excelling at the highest level!",
+      "A+": "Brilliant work, keep shining!",
       A: "Excellent job! Keep up the good work!",
       B: "Well done! You're doing great!",
       C: "Good effort, but there's room for improvement.",
