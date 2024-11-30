@@ -27,6 +27,7 @@ const SchoolNavbar = () => {
               
             
             </NavDropdown>
+            <Link to="/ResultCard" className="nav-link">Genrerate Result Card</Link>
             <Link to="/campus" className="nav-link">Our Campuses</Link>
            
           

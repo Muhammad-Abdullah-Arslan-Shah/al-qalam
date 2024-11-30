@@ -210,13 +210,20 @@ const PrintResultCard = () => {
 
           {/* Result Summary */}
           <div className="result-summary">
-            <p>
-              <strong>Comments:</strong> {getTeacherComments(grade)}
-              <span className="float-end" style={{ marginRight: "40px" }}>
-                <strong>Teacher Name: </strong> {studentData.teacherName}
-              </span>
-            </p>
-          </div>
+  <div className="row">
+    <div className="col-6 justify-content-start">
+      <p>
+        <strong>Comments:</strong> {getTeacherComments(grade)}
+      </p>
+    </div>
+    <div className="col-6 d-flex justify-content-end mt-2">
+      <p>
+        <strong>Teacher Name: </strong> {studentData.teacherName}
+      </p>
+    </div>
+  </div>
+</div>
+
 
           {/* Footer with Teacher and Principal Signatures */}
           <div className="row" style={{ marginTop: "45px" }}>
